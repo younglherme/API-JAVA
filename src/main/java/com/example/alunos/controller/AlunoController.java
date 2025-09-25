@@ -1,6 +1,8 @@
 package com.example.alunos.controller;
 
+import com.example.alunos.dto.AlunoRequest;
 import com.example.alunos.dto.AlunoResponse;
+import com.example.alunos.dto.MatriculaDTO;
 import com.example.alunos.service.AlunoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,24 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<AlunoResponse> criar (@RequestBody AlunoResponse request){
+    public ResponseEntity<AlunoResponse> criar (@RequestBody AlunoRequest request){
         return  ResponseEntity.status(HttpStatus.CREATED).body(AlunoService.salvar(request));
     }
     @GetMapping
     public List<AlunoResponse> listarTodos(){
         return alunoService.listarTodos();
+    }
+    @GetMapping("/{id}/matriculas")
+    public List<MatriculaDTO> listarMatriculas(@PathVariable Long id){
+        return alunoService.listarMatriculas(id);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<AlunoResponse> atualizar(@PathVariable Long id, @RequestBody AlunoRequest request){
+        return  ResponseEntity.ok(alunoService.atualizar(id, request));
+    }
+    @DeleteMapping
+    public ResponseEntity<Void> remover(@PathVariable Long id){
+        alunoService.remover(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -32,7 +32,7 @@ public class AlunoMapper {
 
     public AlunoResponse toResponse(Aluno aluno){
         List<MatriculaDTO> matriculaDTOS = aluno.getMatriculas().stream().map(m ->
-                new MatriculaDTO(m.getCodigoMatricula(),m.getNomeCurso(),m.getDataInicio()).toList();
+                new MatriculaDTO(m.getCodigoMatricula(),m.getNomeCurso(),m.getDataInicio())).toList();
         return new AlunoResponse(aluno.getId(), aluno.getNome(), aluno.getTelefone(), aluno.getDataNascimento(),matriculaDTOS);
     }
 

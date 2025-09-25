@@ -24,7 +24,10 @@ public class AlunoService {
         this.alunoMapper = alunoMapper;
     }
 
-    public AlunoResponse salvar(AlunoRequest request){
+    public AlunoResponse salvar(AlunoResponse request){
+        if (request == null || request.nome() == null || request.nome().isBlank()) {
+            throw new IllegalArgumentException("Nome do aluno é obrigatório!");
+        }
         Aluno aluno = alunoMapper.toEntity(request);
         alunoRepository.save(aluno);
         return alunoMapper.toResponse(aluno);
