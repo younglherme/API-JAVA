@@ -22,8 +22,8 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<AlunoResponse> criar (@RequestBody AlunoRequest request){
-        return  ResponseEntity.status(HttpStatus.CREATED).body(AlunoService.salvar(request));
+    public ResponseEntity<AlunoResponse> criar(@RequestBody AlunoRequest request){
+        return ResponseEntity.status(HttpStatus.CREATED).body(alunoService.salvar(request));
     }
     @GetMapping
     public List<AlunoResponse> listarTodos(){
